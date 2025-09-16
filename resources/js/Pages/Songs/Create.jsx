@@ -27,26 +27,26 @@ export default function Create() {
     };
 
     return (
-        <div className="min-h-screen bg-black font-mono text-green-400">
+        <div className="min-h-screen font-mono text-green-400 bg-black">
             <div className="max-w-2xl px-4 py-8 mx-auto sm:px-6 lg:px-8">
-                <div className="mb-8 border-b border-green-400 pb-4">
-                    <h1 className="text-4xl font-bold text-green-400 tracking-wider">
+                <div className="pb-4 mb-8 border-b border-green-400">
+                    <h1 className="text-4xl font-bold tracking-wider text-green-400">
                         &gt; ADD_NEW_SONG.exe
                     </h1>
                     <Link
                         href="/songs"
-                        className="text-green-400 hover:text-green-300 transition-colors duration-150 tracking-wide"
+                        className="tracking-wide text-green-400 transition-colors duration-150 hover:text-green-300"
                     >
                         &lt;- [BACK_TO_DATABASE]
                     </Link>
                 </div>
 
-                <div className="bg-black border-2 border-green-400 shadow-lg shadow-green-400/20 p-6">
+                <div className="p-6 bg-black border-2 border-green-400 shadow-lg shadow-green-400/20">
                     <form onSubmit={handleSubmit}>
                         <div className="mb-6">
                             <label
                                 htmlFor="url"
-                                className="block mb-2 text-sm font-bold text-green-400 tracking-wide"
+                                className="block mb-2 text-sm font-bold tracking-wide text-green-400"
                             >
                                 // URL_PATH [REQUIRED]
                             </label>
@@ -64,7 +64,7 @@ export default function Create() {
                                 placeholder="https://music.platform.com/track"
                             />
                             {errors.url && (
-                                <p className="mt-2 text-sm text-red-400 bg-gray-900 px-2 py-1 border-l-4 border-red-400">
+                                <p className="px-2 py-1 mt-2 text-sm text-red-400 bg-gray-900 border-l-4 border-red-400">
                                     ERROR: {errors.url}
                                 </p>
                             )}
@@ -73,7 +73,7 @@ export default function Create() {
                         <div className="mb-6">
                             <label
                                 htmlFor="title"
-                                className="block mb-2 text-sm font-bold text-green-400 tracking-wide"
+                                className="block mb-2 text-sm font-bold tracking-wide text-green-400"
                             >
                                 // TITLE [REQUIRED]
                             </label>
@@ -88,10 +88,10 @@ export default function Create() {
                                         ? 'border-red-400 text-red-300'
                                         : 'border-green-400'
                                 }`}
-                                placeholder="Song title string"
+                                placeholder="song_title"
                             />
                             {errors.title && (
-                                <p className="mt-2 text-sm text-red-400 bg-gray-900 px-2 py-1 border-l-4 border-red-400">
+                                <p className="px-2 py-1 mt-2 text-sm text-red-400 bg-gray-900 border-l-4 border-red-400">
                                     ERROR: {errors.title}
                                 </p>
                             )}
@@ -100,7 +100,7 @@ export default function Create() {
                         <div className="mb-6">
                             <label
                                 htmlFor="artist"
-                                className="block mb-2 text-sm font-bold text-green-400 tracking-wide"
+                                className="block mb-2 text-sm font-bold tracking-wide text-green-400"
                             >
                                 // ARTIST [OPTIONAL]
                             </label>
@@ -115,10 +115,10 @@ export default function Create() {
                                         ? 'border-red-400 text-red-300'
                                         : 'border-green-400'
                                 }`}
-                                placeholder="Artist name string"
+                                placeholder="artist_name"
                             />
                             {errors.artist && (
-                                <p className="mt-2 text-sm text-red-400 bg-gray-900 px-2 py-1 border-l-4 border-red-400">
+                                <p className="px-2 py-1 mt-2 text-sm text-red-400 bg-gray-900 border-l-4 border-red-400">
                                     ERROR: {errors.artist}
                                 </p>
                             )}
@@ -127,7 +127,7 @@ export default function Create() {
                         <div className="mb-6">
                             <label
                                 htmlFor="album"
-                                className="block mb-2 text-sm font-bold text-green-400 tracking-wide"
+                                className="block mb-2 text-sm font-bold tracking-wide text-green-400"
                             >
                                 // ALBUM [OPTIONAL]
                             </label>
@@ -142,10 +142,10 @@ export default function Create() {
                                         ? 'border-red-400 text-red-300'
                                         : 'border-green-400'
                                 }`}
-                                placeholder="Album name string"
+                                placeholder="album_name"
                             />
                             {errors.album && (
-                                <p className="mt-2 text-sm text-red-400 bg-gray-900 px-2 py-1 border-l-4 border-red-400">
+                                <p className="px-2 py-1 mt-2 text-sm text-red-400 bg-gray-900 border-l-4 border-red-400">
                                     ERROR: {errors.album}
                                 </p>
                             )}
@@ -154,7 +154,7 @@ export default function Create() {
                         <div className="mb-6">
                             <label
                                 htmlFor="rating"
-                                className="block mb-2 text-sm font-bold text-green-400 tracking-wide"
+                                className="block mb-2 text-sm font-bold tracking-wide text-green-400"
                             >
                                 // RATING [1-5]
                             </label>
@@ -177,7 +177,7 @@ export default function Create() {
                                 <option value="5">5 [█████]</option>
                             </select>
                             {errors.rating && (
-                                <p className="mt-2 text-sm text-red-400 bg-gray-900 px-2 py-1 border-l-4 border-red-400">
+                                <p className="px-2 py-1 mt-2 text-sm text-red-400 bg-gray-900 border-l-4 border-red-400">
                                     ERROR: {errors.rating}
                                 </p>
                             )}
@@ -186,7 +186,7 @@ export default function Create() {
                         <div className="mb-6">
                             <label
                                 htmlFor="notes"
-                                className="block mb-2 text-sm font-bold text-green-400 tracking-wide"
+                                className="block mb-2 text-sm font-bold tracking-wide text-green-400"
                             >
                                 // NOTES [TEXT_AREA]
                             </label>
@@ -204,38 +204,42 @@ export default function Create() {
                                 placeholder="// Additional notes and comments here..."
                             />
                             {errors.notes && (
-                                <p className="mt-2 text-sm text-red-400 bg-gray-900 px-2 py-1 border-l-4 border-red-400">
+                                <p className="px-2 py-1 mt-2 text-sm text-red-400 bg-gray-900 border-l-4 border-red-400">
                                     ERROR: {errors.notes}
                                 </p>
                             )}
                         </div>
 
                         <div className="mb-8">
-                            <label className="flex items-center bg-gray-900 px-4 py-3 border-2 border-green-400/50 hover:border-green-400 transition-colors duration-200">
+                            <label className="flex items-center px-4 py-3 transition-colors duration-200 bg-gray-900 border-2 border-green-400/50 hover:border-green-400">
                                 <input
                                     type="checkbox"
                                     name="favorite"
                                     checked={data.favorite}
                                     onChange={handleChange}
-                                    className="mr-3 w-4 h-4 text-green-400 bg-black border-2 border-green-400 focus:ring-green-400 focus:ring-2"
+                                    className="w-4 h-4 mr-3 text-green-400 bg-black border-2 border-green-400 focus:ring-green-400 focus:ring-2"
                                 />
-                                <span className="text-sm text-green-400 font-mono tracking-wide">
-                                    [✓] MARK_AS_FAVORITE 
-                                    {data.favorite && <span className="text-red-400 animate-pulse ml-2">★</span>}
+                                <span className="font-mono text-sm tracking-wide text-green-400">
+                                    [✓] MARK_AS_FAVORITE
+                                    {data.favorite && (
+                                        <span className="ml-2 text-red-400 animate-pulse">
+                                            ★
+                                        </span>
+                                    )}
                                 </span>
                             </label>
                         </div>
 
-                        <div className="flex items-center justify-between border-t border-green-400/50 pt-6">
+                        <div className="flex items-center justify-between pt-6 border-t border-green-400/50">
                             <button
                                 type="submit"
-                                className="px-6 py-3 font-bold text-black bg-green-400 border-2 border-green-400 hover:bg-black hover:text-green-400 transition-colors duration-200 font-mono tracking-wider"
+                                className="px-6 py-3 font-mono font-bold tracking-wider text-black transition-colors duration-200 bg-green-400 border-2 border-green-400 hover:bg-black hover:text-green-400"
                             >
                                 [EXECUTE_CREATE]
                             </button>
                             <Link
                                 href="/songs"
-                                className="px-6 py-3 font-bold text-green-400 bg-black border-2 border-green-400 hover:bg-green-400 hover:text-black transition-colors duration-200 font-mono tracking-wider"
+                                className="px-6 py-3 font-mono font-bold tracking-wider text-green-400 transition-colors duration-200 bg-black border-2 border-green-400 hover:bg-green-400 hover:text-black"
                             >
                                 [CANCEL_OP]
                             </Link>
