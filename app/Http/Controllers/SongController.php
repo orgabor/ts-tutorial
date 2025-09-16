@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\SongAdded;
 use App\Http\Requests\SongRequest;
 use App\Models\Song;
 use Illuminate\Http\RedirectResponse;
@@ -35,7 +36,10 @@ class SongController extends Controller
      */
     public function store(SongRequest $request): RedirectResponse
     {
-        Song::create($request->validated());
+        $song = Song::create($request->validated());
+
+        // Broadcast the SongAdded event
+        broadcast(new SongAdded($song));
 
         return redirect()->route('songs.index')
             ->with('success', 'Song created successfully.');
