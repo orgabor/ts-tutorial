@@ -6,7 +6,7 @@
     <title>Lizzen</title>
 
     @viteReactRefresh
-    @vite(['resources/js/app.jsx', "resources/js/pages/{$page['component']}.jsx"])
+    @vite(['resources/js/app.jsx', "resources/js/pages/{$page['component']}.jsx", 'resources/css/app.css'])
     @inertiaHead
   </head>
   <body>
