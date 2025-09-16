@@ -27,28 +27,28 @@ export default function Create() {
     };
 
     return (
-        <div className="min-h-screen bg-gray-900">
+        <div className="min-h-screen bg-black font-mono text-green-400">
             <div className="max-w-2xl px-4 py-8 mx-auto sm:px-6 lg:px-8">
-                <div className="mb-6">
-                    <h1 className="text-3xl font-bold text-white">
-                        Add New Song
+                <div className="mb-8 border-b border-green-400 pb-4">
+                    <h1 className="text-4xl font-bold text-green-400 tracking-wider">
+                        &gt; ADD_NEW_SONG.exe
                     </h1>
                     <Link
                         href="/songs"
-                        className="text-blue-400 hover:underline"
+                        className="text-green-400 hover:text-green-300 transition-colors duration-150 tracking-wide"
                     >
-                        ← Back to Songs
+                        &lt;- [BACK_TO_DATABASE]
                     </Link>
                 </div>
 
-                <div className="px-8 pt-6 pb-8 bg-gray-800 rounded shadow-md">
+                <div className="bg-black border-2 border-green-400 shadow-lg shadow-green-400/20 p-6">
                     <form onSubmit={handleSubmit}>
-                        <div className="mb-4">
+                        <div className="mb-6">
                             <label
                                 htmlFor="url"
-                                className="block mb-2 text-sm font-bold text-white"
+                                className="block mb-2 text-sm font-bold text-green-400 tracking-wide"
                             >
-                                URL *
+                                // URL_PATH [REQUIRED]
                             </label>
                             <input
                                 type="url"
@@ -56,26 +56,26 @@ export default function Create() {
                                 name="url"
                                 value={data.url}
                                 onChange={handleChange}
-                                className={`shadow appearance-none border rounded w-full py-2 px-3 bg-gray-700 text-white leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                                className={`font-mono border-2 w-full py-3 px-4 bg-black text-green-400 leading-tight focus:outline-none focus:border-green-300 transition-colors duration-200 ${
                                     errors.url
-                                        ? 'border-red-500'
-                                        : 'border-gray-600'
+                                        ? 'border-red-400 text-red-300'
+                                        : 'border-green-400'
                                 }`}
-                                placeholder="https://example.com/song"
+                                placeholder="https://music.platform.com/track"
                             />
                             {errors.url && (
-                                <p className="mt-1 text-xs italic text-red-400">
-                                    {errors.url}
+                                <p className="mt-2 text-sm text-red-400 bg-gray-900 px-2 py-1 border-l-4 border-red-400">
+                                    ERROR: {errors.url}
                                 </p>
                             )}
                         </div>
 
-                        <div className="mb-4">
+                        <div className="mb-6">
                             <label
                                 htmlFor="title"
-                                className="block mb-2 text-sm font-bold text-white"
+                                className="block mb-2 text-sm font-bold text-green-400 tracking-wide"
                             >
-                                Title *
+                                // TITLE [REQUIRED]
                             </label>
                             <input
                                 type="text"
@@ -83,26 +83,26 @@ export default function Create() {
                                 name="title"
                                 value={data.title}
                                 onChange={handleChange}
-                                className={`shadow appearance-none border rounded w-full py-2 px-3 bg-gray-700 text-white leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                                className={`font-mono border-2 w-full py-3 px-4 bg-black text-green-400 leading-tight focus:outline-none focus:border-green-300 transition-colors duration-200 ${
                                     errors.title
-                                        ? 'border-red-500'
-                                        : 'border-gray-600'
+                                        ? 'border-red-400 text-red-300'
+                                        : 'border-green-400'
                                 }`}
-                                placeholder="Song title"
+                                placeholder="Song title string"
                             />
                             {errors.title && (
-                                <p className="mt-1 text-xs italic text-red-400">
-                                    {errors.title}
+                                <p className="mt-2 text-sm text-red-400 bg-gray-900 px-2 py-1 border-l-4 border-red-400">
+                                    ERROR: {errors.title}
                                 </p>
                             )}
                         </div>
 
-                        <div className="mb-4">
+                        <div className="mb-6">
                             <label
                                 htmlFor="artist"
-                                className="block mb-2 text-sm font-bold text-white"
+                                className="block mb-2 text-sm font-bold text-green-400 tracking-wide"
                             >
-                                Artist
+                                // ARTIST [OPTIONAL]
                             </label>
                             <input
                                 type="text"
@@ -110,26 +110,26 @@ export default function Create() {
                                 name="artist"
                                 value={data.artist}
                                 onChange={handleChange}
-                                className={`shadow appearance-none border rounded w-full py-2 px-3 bg-gray-700 text-white leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                                className={`font-mono border-2 w-full py-3 px-4 bg-black text-green-400 leading-tight focus:outline-none focus:border-green-300 transition-colors duration-200 ${
                                     errors.artist
-                                        ? 'border-red-500'
-                                        : 'border-gray-600'
+                                        ? 'border-red-400 text-red-300'
+                                        : 'border-green-400'
                                 }`}
-                                placeholder="Artist name"
+                                placeholder="Artist name string"
                             />
                             {errors.artist && (
-                                <p className="mt-1 text-xs italic text-red-400">
-                                    {errors.artist}
+                                <p className="mt-2 text-sm text-red-400 bg-gray-900 px-2 py-1 border-l-4 border-red-400">
+                                    ERROR: {errors.artist}
                                 </p>
                             )}
                         </div>
 
-                        <div className="mb-4">
+                        <div className="mb-6">
                             <label
                                 htmlFor="album"
-                                className="block mb-2 text-sm font-bold text-white"
+                                className="block mb-2 text-sm font-bold text-green-400 tracking-wide"
                             >
-                                Album
+                                // ALBUM [OPTIONAL]
                             </label>
                             <input
                                 type="text"
@@ -137,58 +137,58 @@ export default function Create() {
                                 name="album"
                                 value={data.album}
                                 onChange={handleChange}
-                                className={`shadow appearance-none border rounded w-full py-2 px-3 bg-gray-700 text-white leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                                className={`font-mono border-2 w-full py-3 px-4 bg-black text-green-400 leading-tight focus:outline-none focus:border-green-300 transition-colors duration-200 ${
                                     errors.album
-                                        ? 'border-red-500'
-                                        : 'border-gray-600'
+                                        ? 'border-red-400 text-red-300'
+                                        : 'border-green-400'
                                 }`}
-                                placeholder="Album name"
+                                placeholder="Album name string"
                             />
                             {errors.album && (
-                                <p className="mt-1 text-xs italic text-red-400">
-                                    {errors.album}
+                                <p className="mt-2 text-sm text-red-400 bg-gray-900 px-2 py-1 border-l-4 border-red-400">
+                                    ERROR: {errors.album}
                                 </p>
                             )}
                         </div>
 
-                        <div className="mb-4">
+                        <div className="mb-6">
                             <label
                                 htmlFor="rating"
-                                className="block mb-2 text-sm font-bold text-white"
+                                className="block mb-2 text-sm font-bold text-green-400 tracking-wide"
                             >
-                                Rating (1-5)
+                                // RATING [1-5]
                             </label>
                             <select
                                 id="rating"
                                 name="rating"
                                 value={data.rating}
                                 onChange={handleChange}
-                                className={`shadow border rounded w-full py-2 px-3 bg-gray-700 text-white leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                                className={`font-mono border-2 w-full py-3 px-4 bg-black text-green-400 leading-tight focus:outline-none focus:border-green-300 transition-colors duration-200 ${
                                     errors.rating
-                                        ? 'border-red-500'
-                                        : 'border-gray-600'
+                                        ? 'border-red-400 text-red-300'
+                                        : 'border-green-400'
                                 }`}
                             >
-                                <option value="">Select rating</option>
-                                <option value="1">1 ⭐</option>
-                                <option value="2">2 ⭐⭐</option>
-                                <option value="3">3 ⭐⭐⭐</option>
-                                <option value="4">4 ⭐⭐⭐⭐</option>
-                                <option value="5">5 ⭐⭐⭐⭐⭐</option>
+                                <option value="">SELECT_RATING</option>
+                                <option value="1">1 [█░░░░]</option>
+                                <option value="2">2 [██░░░]</option>
+                                <option value="3">3 [███░░]</option>
+                                <option value="4">4 [████░]</option>
+                                <option value="5">5 [█████]</option>
                             </select>
                             {errors.rating && (
-                                <p className="mt-1 text-xs italic text-red-400">
-                                    {errors.rating}
+                                <p className="mt-2 text-sm text-red-400 bg-gray-900 px-2 py-1 border-l-4 border-red-400">
+                                    ERROR: {errors.rating}
                                 </p>
                             )}
                         </div>
 
-                        <div className="mb-4">
+                        <div className="mb-6">
                             <label
                                 htmlFor="notes"
-                                className="block mb-2 text-sm font-bold text-white"
+                                className="block mb-2 text-sm font-bold text-green-400 tracking-wide"
                             >
-                                Notes
+                                // NOTES [TEXT_AREA]
                             </label>
                             <textarea
                                 id="notes"
@@ -196,47 +196,48 @@ export default function Create() {
                                 value={data.notes}
                                 onChange={handleChange}
                                 rows="4"
-                                className={`shadow appearance-none border rounded w-full py-2 px-3 bg-gray-700 text-white leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                                className={`font-mono border-2 w-full py-3 px-4 bg-black text-green-400 leading-tight focus:outline-none focus:border-green-300 transition-colors duration-200 resize-none ${
                                     errors.notes
-                                        ? 'border-red-500'
-                                        : 'border-gray-600'
+                                        ? 'border-red-400 text-red-300'
+                                        : 'border-green-400'
                                 }`}
-                                placeholder="Add any notes about this song..."
+                                placeholder="// Additional notes and comments here..."
                             />
                             {errors.notes && (
-                                <p className="mt-1 text-xs italic text-red-400">
-                                    {errors.notes}
+                                <p className="mt-2 text-sm text-red-400 bg-gray-900 px-2 py-1 border-l-4 border-red-400">
+                                    ERROR: {errors.notes}
                                 </p>
                             )}
                         </div>
 
-                        <div className="mb-6">
-                            <label className="flex items-center">
+                        <div className="mb-8">
+                            <label className="flex items-center bg-gray-900 px-4 py-3 border-2 border-green-400/50 hover:border-green-400 transition-colors duration-200">
                                 <input
                                     type="checkbox"
                                     name="favorite"
                                     checked={data.favorite}
                                     onChange={handleChange}
-                                    className="mr-2 leading-tight"
+                                    className="mr-3 w-4 h-4 text-green-400 bg-black border-2 border-green-400 focus:ring-green-400 focus:ring-2"
                                 />
-                                <span className="text-sm text-white">
-                                    Mark as favorite ❤️
+                                <span className="text-sm text-green-400 font-mono tracking-wide">
+                                    [✓] MARK_AS_FAVORITE 
+                                    {data.favorite && <span className="text-red-400 animate-pulse ml-2">★</span>}
                                 </span>
                             </label>
                         </div>
 
-                        <div className="flex items-center justify-between">
+                        <div className="flex items-center justify-between border-t border-green-400/50 pt-6">
                             <button
                                 type="submit"
-                                className="px-4 py-2 font-bold text-white bg-blue-600 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                className="px-6 py-3 font-bold text-black bg-green-400 border-2 border-green-400 hover:bg-black hover:text-green-400 transition-colors duration-200 font-mono tracking-wider"
                             >
-                                Create Song
+                                [EXECUTE_CREATE]
                             </button>
                             <Link
                                 href="/songs"
-                                className="px-4 py-2 font-bold text-white bg-gray-600 rounded hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500"
+                                className="px-6 py-3 font-bold text-green-400 bg-black border-2 border-green-400 hover:bg-green-400 hover:text-black transition-colors duration-200 font-mono tracking-wider"
                             >
-                                Cancel
+                                [CANCEL_OP]
                             </Link>
                         </div>
                     </form>
