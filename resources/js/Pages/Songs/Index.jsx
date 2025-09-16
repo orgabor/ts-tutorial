@@ -1,7 +1,12 @@
 import React from 'react';
 import { Link, router } from '@inertiajs/react';
+import { useEcho } from '@laravel/echo-react';
 
 export default function Index({ songs }) {
+    useEcho('songs', 'SongAdded', (e) => {
+        router.reload();
+    });
+
     const handleDelete = (id) => {
         if (confirm('Are you sure you want to delete this song?')) {
             router.delete(`/songs/${id}`);
@@ -9,15 +14,15 @@ export default function Index({ songs }) {
     };
 
     return (
-        <div className="min-h-screen bg-black font-mono text-green-400">
+        <div className="min-h-screen font-mono text-green-400 bg-black">
             <div className="px-4 py-8 mx-auto max-w-7xl sm:px-6 lg:px-8">
-                <div className="flex items-center justify-between mb-8 border-b border-green-400 pb-4">
-                    <h1 className="text-4xl font-bold text-green-400 tracking-wider">
+                <div className="flex items-center justify-between pb-4 mb-8 border-b border-green-400">
+                    <h1 className="text-4xl font-bold tracking-wider text-green-400">
                         &gt; SONGS_DATABASE
                     </h1>
                     <Link
                         href="/songs/create"
-                        className="px-6 py-3 font-bold text-black bg-green-400 border-2 border-green-400 hover:bg-black hover:text-green-400 transition-colors duration-200 tracking-wide"
+                        className="px-6 py-3 font-bold tracking-wide text-black transition-colors duration-200 bg-green-400 border-2 border-green-400 hover:bg-black hover:text-green-400"
                     >
                         [+ ADD_SONG]
                     </Link>
@@ -30,10 +35,10 @@ export default function Index({ songs }) {
                                 <div className="px-6 py-6 bg-black border-l-4 border-green-400">
                                     <div className="flex items-center justify-between">
                                         <div className="flex-1">
-                                            <p className="text-lg font-bold text-green-400 truncate tracking-wide">
+                                            <p className="text-lg font-bold tracking-wide text-green-400 truncate">
                                                 <Link
                                                     href={`/songs/${song.id}`}
-                                                    className="hover:text-green-300 transition-colors duration-150"
+                                                    className="transition-colors duration-150 hover:text-green-300"
                                                 >
                                                     &gt; {song.title}
                                                 </Link>
@@ -43,19 +48,19 @@ export default function Index({ songs }) {
                                                     </span>
                                                 )}
                                             </p>
-                                            <p className="flex items-center mt-3 text-sm text-green-300 font-mono">
+                                            <p className="flex items-center mt-3 font-mono text-sm text-green-300">
                                                 {song.artist && (
-                                                    <span className="mr-6 bg-gray-900 px-2 py-1 border border-green-400/50">
+                                                    <span className="px-2 py-1 mr-6 bg-gray-900 border border-green-400/50">
                                                         ARTIST: {song.artist}
                                                     </span>
                                                 )}
                                                 {song.album && (
-                                                    <span className="mr-6 bg-gray-900 px-2 py-1 border border-green-400/50">
+                                                    <span className="px-2 py-1 mr-6 bg-gray-900 border border-green-400/50">
                                                         ALBUM: {song.album}
                                                     </span>
                                                 )}
                                                 {song.rating && (
-                                                    <span className="bg-gray-900 px-2 py-1 border border-green-400/50">
+                                                    <span className="px-2 py-1 bg-gray-900 border border-green-400/50">
                                                         RATING:{' '}
                                                         {'█'.repeat(
                                                             song.rating,
@@ -66,12 +71,12 @@ export default function Index({ songs }) {
                                                     </span>
                                                 )}
                                             </p>
-                                            <p className="mt-3 text-xs text-green-500 font-mono">
+                                            <p className="mt-3 font-mono text-xs text-green-500">
                                                 <a
                                                     href={song.url}
                                                     target="_blank"
                                                     rel="noopener noreferrer"
-                                                    className="text-green-500 hover:text-green-300 transition-colors duration-150 underline decoration-dotted"
+                                                    className="text-green-500 underline transition-colors duration-150 hover:text-green-300 decoration-dotted"
                                                 >
                                                     → {song.url}
                                                 </a>
@@ -80,7 +85,7 @@ export default function Index({ songs }) {
                                         <div className="flex space-x-3">
                                             <Link
                                                 href={`/songs/${song.id}/edit`}
-                                                className="px-4 py-2 text-sm font-bold text-black bg-yellow-400 border-2 border-yellow-400 hover:bg-black hover:text-yellow-400 transition-colors duration-200 tracking-wide"
+                                                className="px-4 py-2 text-sm font-bold tracking-wide text-black transition-colors duration-200 bg-yellow-400 border-2 border-yellow-400 hover:bg-black hover:text-yellow-400"
                                             >
                                                 [EDIT]
                                             </Link>
@@ -88,15 +93,15 @@ export default function Index({ songs }) {
                                                 onClick={() =>
                                                     handleDelete(song.id)
                                                 }
-                                                className="px-4 py-2 text-sm font-bold text-black bg-red-400 border-2 border-red-400 hover:bg-black hover:text-red-400 transition-colors duration-200 tracking-wide"
+                                                className="px-4 py-2 text-sm font-bold tracking-wide text-black transition-colors duration-200 bg-red-400 border-2 border-red-400 hover:bg-black hover:text-red-400"
                                             >
                                                 [DEL]
                                             </button>
                                         </div>
                                     </div>
                                     {song.notes && (
-                                        <div className="mt-4 pt-4 border-t border-green-400/30">
-                                            <p className="text-sm text-green-300 font-mono bg-gray-900 p-3 border-l-2 border-green-400">
+                                        <div className="pt-4 mt-4 border-t border-green-400/30">
+                                            <p className="p-3 font-mono text-sm text-green-300 bg-gray-900 border-l-2 border-green-400">
                                                 // {song.notes}
                                             </p>
                                         </div>

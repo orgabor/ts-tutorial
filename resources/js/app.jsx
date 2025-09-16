@@ -1,8 +1,13 @@
 import { createInertiaApp } from '@inertiajs/react';
+import { configureEcho, echo } from '@laravel/echo-react';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 
 const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true });
+
+configureEcho({
+    broadcaster: 'reverb',
+});
 
 createInertiaApp({
     resolve: (name) => {
