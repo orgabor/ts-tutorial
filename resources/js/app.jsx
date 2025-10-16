@@ -1,6 +1,5 @@
 import { createInertiaApp } from '@inertiajs/react';
-import { configureEcho, echo } from '@laravel/echo-react';
-import React from 'react';
+import { configureEcho } from '@laravel/echo-react';
 import { createRoot } from 'react-dom/client';
 
 const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true });
