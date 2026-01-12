@@ -1,7 +1,22 @@
 import React, { useState } from 'react';
 import { Link, router, useForm } from '@inertiajs/react';
 
-export default function Edit({ song }) {
+export default function Edit({ song, }:
+    {
+        song: {
+            url: string;
+            title: string;
+            artist: string;
+            album: string;
+            notes: string;
+            rating: number;
+            favorite: boolean;
+            tags: {
+                label: string;
+                value: string;
+            }[];
+        }
+    }) {
     const { put, data, setData, errors } = useForm({
         url: song.url || '',
         title: song.title || '',

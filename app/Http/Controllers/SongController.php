@@ -60,6 +60,7 @@ class SongController extends Controller
      */
     public function edit(Song $song): Response
     {
+        $song->load('tags');
         return Inertia::render('Songs/Edit', [
             'song' => $song,
         ]);
