@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, type ChangeEvent, type FormEvent } from 'react';
 import { Link, router, useForm } from '@inertiajs/react';
+import { useEcho } from '@laravel/echo-react';
+import { useJsonStream} from '@laravel/stream-react';
 
 export default function Edit({ song, }:
     {
         song: {
+            id: number;
             url: string;
             title: string;
             artist: string;
@@ -17,28 +20,70 @@ export default function Edit({ song, }:
             }[];
         }
     }) {
-    const { put, data, setData, errors } = useForm({
-        url: song.url || '',
-        title: song.title || '',
-        artist: song.artist || '',
-        album: song.album || '',
-        notes: song.notes || '',
-        rating: song.rating || '',
-        favorite: song.favorite || false,
+    const { put, data, setData, errors } = useForm<{
+        url: string;
+        title: string;
+        artist?: string | null;
+        album?: string | null;
+        notes?: string | null;
+        rating?: number | null;
+        favorite?: boolean | null;
+        playlist: 'chill' | 'workout' | 'party';
+    }>({
+        url: song.url,
+        title: song.title,
+        artist: song.artist,
+        album: song.album,
+        notes: song.notes,
+        rating: song.rating,
+        favorite: song.favorite,
+        playlist: 'chill',
     });
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         put(`/songs/${song.id}`);
     };
 
-    const handleChange = (e) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value, type, checked } = e.target;
-        setData((prev) => ({
+        setData((prev: any) => ({
             ...prev,
             [name]: type === 'checkbox' ? checked : value,
         }));
     };
+
+    useEcho<{
+        song: {
+            id: number;
+            url: string;
+            title: string;
+            artist: string;
+            album: string;
+            notes: string;
+            rating: number;
+            favorite: boolean;
+            created_at: string;
+            updated_at: string;
+        }
+    }>('songs', 'SongAdded', (e)=> {
+        console.log(e.song.url);
+    });
+
+    const streamResult = useJsonStream<{
+        song: {
+            id: number;
+            url: string;
+            title: string;
+            artist: string;
+            album: string;
+            notes: string;
+            rating: number;
+            favorite: boolean;
+            created_at: string;
+            updated_at: string;
+        }
+    }>('/songs.json');
 
     return (
         <div className="min-h-screen bg-black font-mono text-green-400">

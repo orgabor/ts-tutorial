@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class SongRequest extends FormRequest
@@ -29,6 +30,7 @@ class SongRequest extends FormRequest
             'notes' => ['nullable', 'string'],
             'rating' => ['nullable', 'integer', 'min:1', 'max:5'],
             'favorite' => ['nullable', 'boolean'],
+            'playlist' => ['required', Rule::in(['chill', 'workout', 'party'])],
         ];
     }
 
