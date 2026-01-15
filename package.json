@@ -25,6 +25,7 @@
         "@inertiajs/react": "^2.1.6",
         "@laravel/stream-react": "^0.3.10",
         "react": "^19.1.1",
-        "react-dom": "^19.1.1"
+        "react-dom": "^19.1.1",
+        "vite-plugin-run": "^0.6.1"
     }
 }

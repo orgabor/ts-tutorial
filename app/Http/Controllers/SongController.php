@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Data\SongData;
 use App\Events\SongAdded;
 use App\Http\Requests\SongRequest;
 use App\Models\Song;
@@ -62,7 +63,7 @@ class SongController extends Controller
     {
         $song->load('tags');
         return Inertia::render('Songs/Edit', [
-            'song' => $song,
+            'song' => SongData::from($song),
         ]);
     }
 

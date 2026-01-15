@@ -26,7 +26,6 @@ const fetchIt = async <T>(url: string, options?: RequestInit): Promise<T> => {
     }
     return response.json() as Promise<T>;
 };
-
 fetchIt<Song[]>('/songs').then((response)=> {
     response.forEach((song) => {
         song.title;
