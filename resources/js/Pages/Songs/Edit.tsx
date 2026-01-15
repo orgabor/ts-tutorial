@@ -1,35 +1,38 @@
 import React, { useState, type ChangeEvent, type FormEvent } from 'react';
 import { Link, router, useForm } from '@inertiajs/react';
 import { useEcho } from '@laravel/echo-react';
-import { useJsonStream} from '@laravel/stream-react';
+import { useJsonStream } from '@laravel/stream-react';
+import type { Nullable, SongAddedData, SongJsonStreamData, SongModel } from '../../types.js';
 
-export default function Edit({ song, }:
-    {
-        song: {
-            id: number;
-            url: string;
-            title: string;
-            artist: string;
-            album: string;
-            notes: string;
-            rating: number;
-            favorite: boolean;
-            tags: {
-                label: string;
-                value: string;
-            }[];
-        }
-    }) {
-    const { put, data, setData, errors } = useForm<{
-        url: string;
-        title: string;
-        artist?: string | null;
-        album?: string | null;
-        notes?: string | null;
-        rating?: number | null;
-        favorite?: boolean | null;
+type EditProps = {
+    song: Omit<SongModel, 'created_at' | 'updated_at'> & // opposite of picking
+    // picking suff Pick<SongModel, 'id' |'album' | 'artist' | 'notes' | 'rating' | 'favorite'> &
+    Required<Pick<SongModel, | 'tags'>>;
+
+};
+
+type UpdateFormData = Pick<SongModel, 'url' | 'title'>
+    & Partial<Nullable<Pick<SongModel, 'artist' | 'album' | 'notes' | 'rating' | 'favorite'>>>
+    & {
         playlist: 'chill' | 'workout' | 'party';
-    }>({
+    };
+
+// original reference before refactoring
+// type UpdateFormData = {
+//     url: string;
+//     title: string;
+//     artist?: string | null;
+//     album?: string | null;
+//     notes?: string | null;
+//     rating?: number | null;
+//     favorite?: boolean | null;
+//     playlist: 'chill' | 'workout' | 'party';
+// };
+
+
+
+export default function Edit({ song, }: EditProps) {
+    const { put, data, setData, errors } = useForm<UpdateFormData>({
         url: song.url,
         title: song.title,
         artist: song.artist,
@@ -53,37 +56,11 @@ export default function Edit({ song, }:
         }));
     };
 
-    useEcho<{
-        song: {
-            id: number;
-            url: string;
-            title: string;
-            artist: string;
-            album: string;
-            notes: string;
-            rating: number;
-            favorite: boolean;
-            created_at: string;
-            updated_at: string;
-        }
-    }>('songs', 'SongAdded', (e)=> {
+    useEcho<SongAddedData>('songs', 'SongAdded', (e) => {
         console.log(e.song.url);
     });
 
-    const streamResult = useJsonStream<{
-        song: {
-            id: number;
-            url: string;
-            title: string;
-            artist: string;
-            album: string;
-            notes: string;
-            rating: number;
-            favorite: boolean;
-            created_at: string;
-            updated_at: string;
-        }
-    }>('/songs.json');
+    const streamResult = useJsonStream<SongJsonStreamData>('/songs.json');
 
     return (
         <div className="min-h-screen bg-black font-mono text-green-400">
@@ -115,11 +92,10 @@ export default function Edit({ song, }:
                                 name="url"
                                 value={data.url}
                                 onChange={handleChange}
-                                className={`font-mono border-2 w-full py-3 px-4 bg-black text-green-400 leading-tight focus:outline-none focus:border-green-300 transition-colors duration-200 ${
-                                    errors.url
+                                className={`font-mono border-2 w-full py-3 px-4 bg-black text-green-400 leading-tight focus:outline-none focus:border-green-300 transition-colors duration-200 ${errors.url
                                         ? 'border-red-400 text-red-300'
                                         : 'border-green-400'
-                                }`}
+                                    }`}
                                 placeholder="https://music.platform.com/track"
                             />
                             {errors.url && (
@@ -142,11 +118,10 @@ export default function Edit({ song, }:
                                 name="title"
                                 value={data.title}
                                 onChange={handleChange}
-                                className={`font-mono border-2 w-full py-3 px-4 bg-black text-green-400 leading-tight focus:outline-none focus:border-green-300 transition-colors duration-200 ${
-                                    errors.title
+                                className={`font-mono border-2 w-full py-3 px-4 bg-black text-green-400 leading-tight focus:outline-none focus:border-green-300 transition-colors duration-200 ${errors.title
                                         ? 'border-red-400 text-red-300'
                                         : 'border-green-400'
-                                }`}
+                                    }`}
                                 placeholder="Song title string"
                             />
                             {errors.title && (
@@ -169,11 +144,10 @@ export default function Edit({ song, }:
                                 name="artist"
                                 value={data.artist}
                                 onChange={handleChange}
-                                className={`font-mono border-2 w-full py-3 px-4 bg-black text-green-400 leading-tight focus:outline-none focus:border-green-300 transition-colors duration-200 ${
-                                    errors.artist
+                                className={`font-mono border-2 w-full py-3 px-4 bg-black text-green-400 leading-tight focus:outline-none focus:border-green-300 transition-colors duration-200 ${errors.artist
                                         ? 'border-red-400 text-red-300'
                                         : 'border-green-400'
-                                }`}
+                                    }`}
                                 placeholder="Artist name string"
                             />
                             {errors.artist && (
@@ -196,11 +170,10 @@ export default function Edit({ song, }:
                                 name="album"
                                 value={data.album}
                                 onChange={handleChange}
-                                className={`font-mono border-2 w-full py-3 px-4 bg-black text-green-400 leading-tight focus:outline-none focus:border-green-300 transition-colors duration-200 ${
-                                    errors.album
+                                className={`font-mono border-2 w-full py-3 px-4 bg-black text-green-400 leading-tight focus:outline-none focus:border-green-300 transition-colors duration-200 ${errors.album
                                         ? 'border-red-400 text-red-300'
                                         : 'border-green-400'
-                                }`}
+                                    }`}
                                 placeholder="Album name string"
                             />
                             {errors.album && (
@@ -222,11 +195,10 @@ export default function Edit({ song, }:
                                 name="rating"
                                 value={data.rating}
                                 onChange={handleChange}
-                                className={`font-mono border-2 w-full py-3 px-4 bg-black text-green-400 leading-tight focus:outline-none focus:border-green-300 transition-colors duration-200 ${
-                                    errors.rating
+                                className={`font-mono border-2 w-full py-3 px-4 bg-black text-green-400 leading-tight focus:outline-none focus:border-green-300 transition-colors duration-200 ${errors.rating
                                         ? 'border-red-400 text-red-300'
                                         : 'border-green-400'
-                                }`}
+                                    }`}
                             >
                                 <option value="">SELECT_RATING</option>
                                 <option value="1">1 [█░░░░]</option>
@@ -255,11 +227,10 @@ export default function Edit({ song, }:
                                 value={data.notes}
                                 onChange={handleChange}
                                 rows="4"
-                                className={`font-mono border-2 w-full py-3 px-4 bg-black text-green-400 leading-tight focus:outline-none focus:border-green-300 transition-colors duration-200 resize-none ${
-                                    errors.notes
+                                className={`font-mono border-2 w-full py-3 px-4 bg-black text-green-400 leading-tight focus:outline-none focus:border-green-300 transition-colors duration-200 resize-none ${errors.notes
                                         ? 'border-red-400 text-red-300'
                                         : 'border-green-400'
-                                }`}
+                                    }`}
                                 placeholder="// Additional notes and comments here..."
                             />
                             {errors.notes && (
